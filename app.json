@@ -1,21 +1,24 @@
 {
   "expo": {
-    "name": "focus_toolkit_rn",
-    "slug": "focus_toolkit_rn",
+    "name": "focus_toolkit",
+    "slug": "focustoolkit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "focustoolkit",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.focustoolkit.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.focustoolkit.app",
+      "usesCleartextTraffic": true
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +39,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      }
     }
   }
 }
