@@ -9,7 +9,7 @@ import {
 import React from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-import Colors from "@/constants/Colors.tsx";
+import Colors from "@/constants/Colors";
 const { width, height } = Dimensions.get("window");
 
 interface HeaderProps {

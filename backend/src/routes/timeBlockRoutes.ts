@@ -1,5 +1,8 @@
-import { Router } from 'express';
-import { createTimeBlock } from '../controllers/timeblockController.ts';
+import { Router } from "express";
+import {
+  getTimeBlocksByDate,
+  createTimeBlock,
+} from "../controllers/timeBlockController.ts";
 
 const router = Router();
 
@@ -10,12 +13,15 @@ const router = Router();
 // router.get('/:id', getTaskById);
 
 // Create a new task
-router.post('/', createTimeBlock);
+router.post("/", createTimeBlock);
 
 // // Update an existing task
 // router.put('/:id', updateTask);
 
 // // Delete a task
 // router.delete('/:id', deleteTask);
+
+// New route to get time blocks by date
+router.get("/:date", getTimeBlocksByDate);
 
 export default router;

@@ -28,8 +28,6 @@ function RootLayoutNav() {
         name="addNewTimeBlock/index"
         options={{
           presentation: "modal",
-          headerShown: true,
-          title: "Add New Time Block",
         }}
       />
       <Stack.Screen name="login/signIn" />

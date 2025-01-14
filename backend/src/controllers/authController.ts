@@ -69,23 +69,4 @@ const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const googleAuthCallback = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    if (!req.user) {
-      res.status(401).json({ message: "Authentication failed" });
-      return;
-    }
-
-    res.json({
-      success: true,
-      user: req.user,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-export { register, login, googleAuthCallback };
+export { register, login };

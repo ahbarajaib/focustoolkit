@@ -9,8 +9,12 @@ import {
 import React from "react";
 import colors from "@/constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { Entypo } from "@expo/vector-icons";
+
+interface InitialTimeBlockProps {
+  selectedDate: string;
+}
 
 const { width } = Dimensions.get("window");
 const MIN_BLOCK_HEIGHT = 60;
@@ -20,7 +24,7 @@ const PIPE_WIDTH = 32;
 const INDICATOR_SIZE = PIPE_WIDTH * 1;
 const INNER_INDICATOR_SIZE = PIPE_WIDTH * 0.4;
 
-// Dummy data
+// Dummy data with date property
 const dummyTasks = [
   {
     id: 1,
@@ -28,6 +32,7 @@ const dummyTasks = [
     startTime: "06:30",
     endTime: "07:30",
     color: "#FF6B6B",
+    date: "2025-01-09",
   },
   {
     id: 2,
@@ -35,6 +40,7 @@ const dummyTasks = [
     startTime: "14:00",
     endTime: "14:30",
     color: "#4ECDC4",
+    date: "2025-01-09",
   },
   {
     id: 3,
@@ -42,6 +48,7 @@ const dummyTasks = [
     startTime: "21:00",
     endTime: "22:30",
     color: "#4edaaa",
+    date: "2025-01-10",
   },
   {
     id: 4,
@@ -49,6 +56,15 @@ const dummyTasks = [
     startTime: "07:30",
     endTime: "08:00",
     color: "#FF6B3A",
+    date: "2025-01-09",
+  },
+  {
+    id: 5,
+    title: "Just a test",
+    startTime: "13:30",
+    endTime: "14:30",
+    color: "#FFa3AA",
+    date: "2025-01-10",
   },
 ];
 
@@ -73,7 +89,7 @@ const calculateBlockHeight = (duration: number) => {
   return MAX_BLOCK_HEIGHT;
 };
 
-const getTaskProgress = (task, currentTime) => {
+const getTaskProgress = (task: any, currentTime: any) => {
   const startHour = parseInt(task.startTime.split(":")[0]);
   const startMinute = parseInt(task.startTime.split(":")[1]);
   const endHour = parseInt(task.endTime.split(":")[0]);
@@ -88,7 +104,9 @@ const getTaskProgress = (task, currentTime) => {
   return ((currentTime - taskStart) / (taskEnd - taskStart)) * 100;
 };
 
-export default function InitialTimeBlock() {
+const InitialTimeBlock: React.FC<InitialTimeBlockProps> = ({
+  selectedDate,
+}) => {
   const router = useRouter();
 
   const hours = Array.from({ length: 24 }, (_, i) => i);
@@ -96,15 +114,18 @@ export default function InitialTimeBlock() {
 
   const handlePress = () => {
     console.log("Navigating to /addNewTimeBlock");
-
     router.push("/addNewTimeBlock");
   };
+
+  // Filter tasks based on the selected date
+  const filteredTasks = dummyTasks.filter((task) => task.date === selectedDate);
+
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.timeline}>
           {hours.map((hour) => {
-            const task = dummyTasks.find(
+            const task = filteredTasks.find(
               (task) =>
                 parseInt(task.startTime.split(":")[0]) <= hour &&
                 parseInt(task.endTime.split(":")[0]) > hour
@@ -121,27 +142,33 @@ export default function InitialTimeBlock() {
                 key={hour}
                 style={[styles.hourContainer, { height: blockHeight }]}
               >
-                <View style={[styles.pipe, { height: blockHeight }]}>
-                  {task && currentTime > hour && (
-                    <LinearGradient
-                      colors={[task.color, task.color]}
-                      style={[
-                        styles.liquidIndicator,
-                        { height: `${getTaskProgress(task, currentTime)}%` },
-                      ]}
-                    />
-                  )}
-                  {currentTime > hour && currentTime < hour + 1 && (
-                    <View style={styles.currentTimeIndicator}>
-                      <View style={styles.currentTimeInner} />
-                    </View>
-                  )}
-                </View>
                 <View style={styles.timeLabel}>
                   <Text style={styles.timeText}>
                     {hour.toString().padStart(2, "0")}:00
                   </Text>
                 </View>
+                {task ? (
+                  <View style={[styles.pipe, { height: blockHeight }]}>
+                    {currentTime > hour && (
+                      <LinearGradient
+                        colors={[task.color, task.color]}
+                        style={[
+                          styles.liquidIndicator,
+                          { height: `${getTaskProgress(task, currentTime)}%` },
+                        ]}
+                      />
+                    )}
+                    {currentTime > hour && currentTime < hour + 1 && (
+                      <View style={styles.currentTimeIndicator}>
+                        <View style={styles.currentTimeInner} />
+                      </View>
+                    )}
+                  </View>
+                ) : (
+                  <View style={styles.dot}>
+                    <Entypo name="dot-single" size={24} color="black" />
+                  </View>
+                )}
                 {task && (
                   <View
                     style={[
@@ -168,7 +195,9 @@ export default function InitialTimeBlock() {
       </TouchableOpacity>
     </View>
   );
-}
+};
+
+export default InitialTimeBlock;
 
 const styles = StyleSheet.create({
   container: {
@@ -191,6 +220,10 @@ const styles = StyleSheet.create({
     borderRadius: PIPE_WIDTH / 2,
     overflow: "hidden",
     position: "relative",
+  },
+  dot: {
+    width: PIPE_WIDTH,
+    alignItems: "center",
   },
   liquidIndicator: {
     width: PIPE_WIDTH,
@@ -270,7 +303,7 @@ const styles = StyleSheet.create({
   },
   floatingButtonText: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
   },
 });
