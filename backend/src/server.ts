@@ -9,7 +9,7 @@ dotenv.config();
 const app: Express = express();
 
 const corsOptions = {
-  origin: "http://localhost:8081", // Replace with your React Native app's URL
+  origin: process.env.CLIENT_URL || "http://localhost:8081",
   credentials: true,
 };
 
