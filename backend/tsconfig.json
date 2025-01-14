@@ -1,19 +1,11 @@
 {
+  "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "node",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    "outDir": "dist",
+    "allowJs": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "ts-node": {
-    "esm": true
-  },
-  "extends": "expo/tsconfig.base"
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
