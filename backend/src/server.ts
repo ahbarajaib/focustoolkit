@@ -25,8 +25,9 @@ const startServer = async () => {
   try {
     await connectToDatabase();
     const port = process.env.PORT || 6001;
+    const host = process.env.HOST || "localhost";
     app.listen(port, () => {
-      console.log(`Server is running at http://localhost:${port}`);
+      console.log(`Server is running at http://${host}:${port}`);
     });
   } catch (error) {
     console.error("Error starting the server:", error);
