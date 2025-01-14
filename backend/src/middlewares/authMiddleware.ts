@@ -1,6 +1,6 @@
-import User from "../models/UserModel.ts";
+import User from "../models/UserModel.js";
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../utils/jwtUtils.ts";
+import { verifyToken } from "../utils/jwtUtils.js";
 
 const protect = async (
   req: Request,
@@ -8,12 +8,6 @@ const protect = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    // First check if user is authenticated via Passport session (Google Auth)
-    if (req.isAuthenticated()) {
-      next();
-      return;
-    }
-
     const authHeader = req.headers.authorization;
     if (!authHeader?.startsWith("Bearer ")) {
       res.status(401).json({ message: "Not authorized, please login" });
@@ -36,7 +30,6 @@ const protect = async (
         return;
       }
 
-      req.user = user;
       next();
     } catch (tokenError: any) {
       // Handle JWT verification errors gracefully

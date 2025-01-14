@@ -1,11 +1,10 @@
 import express, { Router, Request, Response } from "express";
-import passport from "passport";
-import { register, login } from "../controllers/authController.ts";
-import { protect } from "../middlewares/authMiddleware.ts";
+import { register, login } from "../controllers/authController.js";
+import { protect } from "../middlewares/authMiddleware.js";
 import {
   validateUser,
   validateLogin,
-} from "../middlewares/validationMiddleware.ts";
+} from "../middlewares/validationMiddleware.js";
 
 const router: Router = express.Router();
 

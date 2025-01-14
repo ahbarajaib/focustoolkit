@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import express, { Express, NextFunction, Request, Response } from "express";
-import connectToDatabase from "./config/db.ts";
-import authRoutes from "./routes/authRoutes.ts";
-import timeBlockRoutes from "./routes/timeBlockRoutes.ts";
+import connectToDatabase from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
+import timeBlockRoutes from "./routes/timeBlockRoutes.js";
 import cors from "cors";
 dotenv.config();
 

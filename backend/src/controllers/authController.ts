@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import User from "../models/UserModel.ts";
-import { comparePassword, hashPassword } from "../utils/bcryptUtils.ts";
-import { generateToken } from "../utils/jwtUtils.ts";
+import User from "../models/UserModel.js";
+import { comparePassword, hashPassword } from "../utils/bcryptUtils.js";
+import { generateToken } from "../utils/jwtUtils.js";
 
 const register = async (req: Request, res: Response): Promise<void> => {
   const { name, email, password } = req.body;

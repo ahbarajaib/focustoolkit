@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   getTimeBlocksByDate,
   createTimeBlock,
-} from "../controllers/timeBlockController.ts";
+} from "../controllers/timeBlockController.js";
 
 const router = Router();
 

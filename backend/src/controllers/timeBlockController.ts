@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import TimeBlock from "../models/TimeBlockModel.ts";
+import TimeBlock from "../models/TimeBlockModel.js";
 import { Types } from "mongoose";
 
 const createTimeBlock = async (req: Request, res: Response): Promise<void> => {
