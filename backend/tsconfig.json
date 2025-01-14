@@ -1,7 +1,16 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "_version": "22.0.0",
+
   "compilerOptions": {
     "outDir": "dist",
+    "lib": ["es2023"],
+    "module": "Node16", // Change this from "ESNext" to "Node16"
+    "target": "ES2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node16",
     "allowJs": true
   },
   "include": ["src/**/*"],
