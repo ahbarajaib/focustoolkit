@@ -24,10 +24,16 @@ app.use("/api/timeblock", timeBlockRoutes);
 const startServer = async () => {
   try {
     await connectToDatabase();
+    const isProduction = process.env.NODE_ENV === "production";
+    console.log(
+      `Running in ${isProduction ? "production" : "development"} mode`
+    );
+
     const port = process.env.PORT || 6001;
-    const host = process.env.HOST || "localhost";
+
+    // Railway dynamically assigns a hostname, so omit the hardcoded 'localhost'
     app.listen(port, () => {
-      console.log(`Server is running at http://${host}:${port}`);
+      console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
     console.error("Error starting the server:", error);
