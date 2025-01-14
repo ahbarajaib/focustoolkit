@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "install:prod": "npm install --omit=dev",
     "dev": "tsx watch src/server.ts"
   },
   "engines": {
