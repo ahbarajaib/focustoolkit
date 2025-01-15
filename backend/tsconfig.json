@@ -5,7 +5,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "lib": ["es2023"],
-    "module": "Node16", // Change this from "ESNext" to "Node16"
+    "module": "Node16", // Keep this as Node16
     "target": "ES2022",
     "strict": true,
     "esModuleInterop": true,

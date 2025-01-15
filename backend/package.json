@@ -4,9 +4,9 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "watch": "tsc -w",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
     "start": "node dist/server.js",
-    "build": "tsc",
     "dev": "tsx watch src/server.ts"
   },
   "engines": {

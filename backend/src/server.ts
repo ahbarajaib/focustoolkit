@@ -14,15 +14,21 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/timeblock", timeBlockRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend running...");
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
+});
+
+process.on("unhandledRejection", (error) => {
+  console.error("Unhandled Rejection:", error);
 });
 
 const startServer = async () => {
@@ -35,7 +41,6 @@ const startServer = async () => {
 
     const port = process.env.PORT || 6001;
 
-    // Railway dynamically assigns a hostname, so omit the hardcoded 'localhost'
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
