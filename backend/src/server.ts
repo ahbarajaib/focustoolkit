@@ -21,6 +21,10 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/timeblock", timeBlockRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Backend running...");
+});
+
 const startServer = async () => {
   try {
     await connectToDatabase();
